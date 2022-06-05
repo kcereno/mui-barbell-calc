@@ -11,17 +11,26 @@ import { useState } from "react";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState(null);
 
   const handleShowModal = () => {
     setShowModal(true);
   };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   return (
     <div className="App">
-      <ModalComponent open={showModal} />
+      <ModalComponent
+        showing={showModal}
+        closeModal={handleCloseModal}
+        type={selectedMenu}
+      />
       <ApplicationBar />
       <Container>
-        <Grid container spacing={1} sx={{ paddingTop: 1 }}>
-          <BarWeight />
+        <Grid container spacing={2} sx={{ paddingTop: 2 }}>
+          <BarWeight edit={handleShowModal} />
           <AvailablePlates />
           <TargetWeight />
           <ActualWeight />

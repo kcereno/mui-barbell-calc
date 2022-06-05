@@ -4,11 +4,13 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import { Box } from "@mui/material";
 
-export const BarWeight = () => {
-
+type PropTypes = {
+  edit: () => void;
+};
+export const BarWeight = (props: PropTypes) => {
   return (
     <Grid item xs={6}>
-      <Paper elevation={2}>
+      <Paper elevation={2} onClick={props.edit}>
         <Box sx={{ marginLeft: 1, paddingY: 1 }}>
           <Typography variant="subtitle2" gutterBottom component="div">
             Bar Weight

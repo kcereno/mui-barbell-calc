@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Button, Grid, Box } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import AvailablePlates from "./AvailablePlates";
@@ -16,6 +16,21 @@ export const InputFields = () => {
       </Grid>
       <Grid item xs={12}>
         <AvailablePlates />
+      </Grid>
+      <Grid item xs={12}>
+        <Box sx={{ margin: 1 }}>
+          <Button variant="contained" size="large">
+            Calculate
+          </Button>
+          <Button
+            sx={{ marginLeft: 1 }}
+            variant="contained"
+            size="large"
+            color="error"
+          >
+            Reset
+          </Button>
+        </Box>
       </Grid>
     </Grid>
   );

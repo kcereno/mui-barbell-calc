@@ -21,7 +21,7 @@ const MenuProps = {
   },
 };
 
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
+function getStyles(name: number, personName: readonly number[], theme: Theme) {
   return {
     fontWeight:
       personName.indexOf(name) === -1
@@ -31,34 +31,28 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 }
 
 const AvailablePlates = () => {
-  const [plate, setPlate] = useState<string[]>([]);
+  const [availablePlates, setAvailablePlates] = useState<number[]>([
+    2.5, 5, 10, 15, 25, 35, 45, 55,
+  ]);
   const theme = useTheme();
 
-  const handleChange = (event: SelectChangeEvent<typeof plate>) => {
+  const handleChange = (event: SelectChangeEvent<typeof availablePlates>) => {
     const {
       target: { value },
     } = event;
-    setPlate(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    setAvailablePlates(value as number[]);
   };
 
-  const plates = ["2.5", "5", "10", "15", "25", "35", "45", "55"];
+  const plates = [2.5, 5, 10, 15, 25, 35, 45, 55];
 
   return (
     <>
       <Box
         sx={{
-          marginLeft: 1,
-          paddingY: 1,
-
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
+          marginX: 1,
         }}
       >
-        <FormControl sx={{ m: 1 }}>
+        <FormControl fullWidth>
           <InputLabel id="demo-multiple-chip-label">
             Available Plates
           </InputLabel>
@@ -66,7 +60,7 @@ const AvailablePlates = () => {
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"
             multiple
-            value={plate}
+            value={availablePlates}
             onChange={handleChange}
             input={
               <OutlinedInput
@@ -76,9 +70,11 @@ const AvailablePlates = () => {
             }
             renderValue={(selected) => (
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                {selected.map((value) => (
-                  <Chip key={value} label={value} />
-                ))}
+                {selected
+                  .sort((a, b) => a - b)
+                  .map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
               </Box>
             )}
             MenuProps={MenuProps}
@@ -87,7 +83,7 @@ const AvailablePlates = () => {
               <MenuItem
                 key={plateValue}
                 value={plateValue}
-                style={getStyles(plateValue, plate, theme)}
+                style={getStyles(plateValue, availablePlates, theme)}
               >
                 {plateValue}
               </MenuItem>

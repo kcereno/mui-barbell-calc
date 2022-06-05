@@ -26,7 +26,7 @@ export const BarWeight = (props: PropTypes) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={0}
+          value={45}
           label="Bar Weight"
           onChange={handleChange}
         >

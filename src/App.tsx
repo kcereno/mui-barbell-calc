@@ -1,25 +1,37 @@
 import "./App.css";
 import ApplicationBar from "./components/ApplicationBar";
-import Grid from "@mui/material/Grid";
-import { BarWeight } from "./components/BarWeight";
-import AvailablePlates from "./components/AvailablePlates";
-import TargetWeight from "./components/TargetWeight";
-import { ActualWeight } from "./components/ActualWeight";
-
 import { useState } from "react";
-import { Box, Stack } from "@mui/material";
-import WeightInputs from "./components/WeightInputs";
+import { Grid, Stack, Button, Box } from "@mui/material";
 import { InputFields } from "./components/InputFields";
+import ResultTable from "./components/ResultTable";
+import { BarWeight } from "./components/BarWeight";
+import TargetWeight from "./components/TargetWeight";
+import AvailablePlates from "./components/AvailablePlates";
+import Buttons from "./components/Buttons";
 
 function App() {
   const [barWeight, setBarWeight] = useState<number | null>(null);
+
   return (
     <div className="App">
       <ApplicationBar />
-      <Stack>
-        <InputFields />
-
-      </Stack>
+      <Grid container spacing={1}>
+        <Grid item xs={12} sm={6}>
+          <BarWeight />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TargetWeight />
+        </Grid>
+        <Grid item xs={12}>
+          <AvailablePlates />
+        </Grid>
+        <Grid item xs={12}>
+          <Buttons />
+        </Grid>
+        <Grid item xs={12}>
+          <ResultTable />
+        </Grid>
+      </Grid>
     </div>
   );
 }

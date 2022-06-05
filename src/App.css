@@ -1,9 +1,14 @@
 .App {
   margin: auto;
-  width: 425px;
-background-color: white;
+  max-width: 768px;
+  background-color: white;
   margin-top: 20px;
   border-radius: 5px;
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
+@media (max-width:768px) {
+  .App {
+    margin-top: 0px;
+  }
+}

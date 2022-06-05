@@ -1,25 +1,41 @@
-import React from "react";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 type PropTypes = {
-  edit: () => void;
+  // value: number;
+  // updateBarWeight: (newValue: number) => void;
 };
 export const BarWeight = (props: PropTypes) => {
+  const handleChange = (e: SelectChangeEvent<number>) => {
+    // props.updateBarWeight(e.target.value as number);
+  };
+
   return (
-    <Grid item xs={6}>
-      <Paper elevation={2} onClick={props.edit}>
-        <Box sx={{ marginLeft: 1, paddingY: 1 }}>
-          <Typography variant="subtitle2" gutterBottom component="div">
-            Bar Weight
-          </Typography>
-          <Typography variant="h5" gutterBottom component="div">
-            45lbs
-          </Typography>
-        </Box>
-      </Paper>
-    </Grid>
+    <Box
+      sx={{
+        marginTop: 1,
+        marginLeft: 1,
+        marginRight: { xs: 1, sm: 0 },
+      }}
+    >
+      <FormControl fullWidth margin="dense">
+        <InputLabel id="demo-simple-select-label">Bar Weight</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={0}
+          label="Bar Weight"
+          onChange={handleChange}
+        >
+          <MenuItem value={35}>35lbs</MenuItem>
+          <MenuItem value={45}>45lbs</MenuItem>
+          <MenuItem value={55}>55lbs</MenuItem>
+          <MenuItem value={60}>60lbs</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
   );
 };

@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup, TableFooter } from "@mui/material";
 
 function createData(
   plateValue: number,
@@ -42,9 +42,9 @@ const ResultTable = () => {
           <TableRow>
             <TableCell>Plate Value</TableCell>
             <TableCell align="center">Edit</TableCell>
-            <TableCell align="center">Per Side</TableCell>
-            <TableCell align="center">Total Amount</TableCell>
-            <TableCell align="center">Total Weight</TableCell>
+            <TableCell align="right">Per Side</TableCell>
+            <TableCell align="right">Total Amount</TableCell>
+            <TableCell align="right">Total Weight</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -62,10 +62,14 @@ const ResultTable = () => {
               <TableCell align="right">{row.weightTotal}</TableCell>
             </TableRow>
           ))}
-          <TableRow>
-            <TableCell rowSpan={4} />
-            <TableCell colSpan={2}>Overall Total</TableCell>
-            <TableCell align="right">225lbs</TableCell>
+          <TableRow sx={{ margingTop: 1 }}>
+            <TableCell colSpan={2} rowSpan={5} />
+            <TableCell colSpan={2}>
+              <strong>Total</strong>
+            </TableCell>
+            <TableCell rowSpan={2} align="right">
+              <strong>250lbs</strong>
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>

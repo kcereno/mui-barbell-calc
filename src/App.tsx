@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import ApplicationBar from "./components/ApplicationBar";
+import Grid from "@mui/material/Grid";
+import { BarWeight } from "./components/BarWeight";
+import AvailablePlates from "./components/AvailablePlates";
+import { Container } from "@mui/material";
+import TargetWeight from "./components/TargetWeight";
+import { ActualWeight } from "./components/ActualWeight";
+import ModalComponent from "./components/ModalComponent";
+import { useState } from "react";
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ModalComponent open={showModal} />
+      <ApplicationBar />
+      <Container>
+        <Grid container spacing={1} sx={{ paddingTop: 1 }}>
+          <BarWeight />
+          <AvailablePlates />
+          <TargetWeight />
+          <ActualWeight />
+        </Grid>
+      </Container>
     </div>
   );
 }

@@ -1,17 +1,45 @@
-import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
-import { Container } from "@mui/system";
 import TextField from "@mui/material/TextField";
 
-const TargetWeight = () => {
+type PropTypes = {
+  barWeight: number;
+  updateTargetWeight: React.Dispatch<React.SetStateAction<number>>;
+};
+
+const TargetWeight = (props: PropTypes) => {
+  const [inputIsValid, setInputIsValid] = useState(false);
+  const [isTouched, setisTouched] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setisTouched(true);
+    const input = e.target.value;
+
+    if (+input < props.barWeight) {
+      setInputIsValid(false);
+    } else {
+      setInputIsValid(true);
+    }
+    props.updateTargetWeight(+input);
+  };
+
   return (
-    <Box sx={{ marginTop: { sm: 2 }, marginRight: 1, marginLeft: { xs: 1} }}>
+    <Box sx={{ marginTop: { sm: 2 }, marginRight: 1, marginLeft: { xs: 1 } }}>
       <TextField
+        error={isTouched && !inputIsValid}
+        helperText={
+          isTouched &&
+          !inputIsValid &&
+          "Please enter a number greater than bar weight"
+        }
         fullWidth
         id="outlined-basic"
         label="Target Weight"
         variant="outlined"
+        type="number"
+        onChange={handleChange}
       />
     </Box>
   );

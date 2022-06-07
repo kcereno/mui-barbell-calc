@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
+import React from "react";
 import { Box } from "@mui/material";
 import { Theme, useTheme } from "@mui/material/styles";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -30,17 +28,21 @@ function getStyles(name: number, personName: readonly number[], theme: Theme) {
   };
 }
 
-const AvailablePlates = () => {
-  const [availablePlates, setAvailablePlates] = useState<number[]>([
-    2.5, 5, 10, 15, 25, 35, 45, 55,
-  ]);
+type PropTypes = {
+  availablePlates: number[];
+  updatePlates: React.Dispatch<React.SetStateAction<number[]>>;
+};
+
+const AvailablePlates = (props: PropTypes) => {
   const theme = useTheme();
 
-  const handleChange = (event: SelectChangeEvent<typeof availablePlates>) => {
+  const handleChange = (
+    event: SelectChangeEvent<typeof props.availablePlates>
+  ) => {
     const {
       target: { value },
     } = event;
-    setAvailablePlates(value as number[]);
+    props.updatePlates(value as number[]);
   };
 
   const plates = [2.5, 5, 10, 15, 25, 35, 45, 55];
@@ -60,7 +62,7 @@ const AvailablePlates = () => {
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"
             multiple
-            value={availablePlates}
+            value={props.availablePlates}
             onChange={handleChange}
             input={
               <OutlinedInput
@@ -83,7 +85,7 @@ const AvailablePlates = () => {
               <MenuItem
                 key={plateValue}
                 value={plateValue}
-                style={getStyles(plateValue, availablePlates, theme)}
+                style={getStyles(plateValue, props.availablePlates, theme)}
               >
                 {plateValue}
               </MenuItem>

@@ -5,12 +5,13 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 type PropTypes = {
-  // value: number;
-  // updateBarWeight: (newValue: number) => void;
+  barWeight: number;
+  updateBarWeight: React.Dispatch<React.SetStateAction<number>>;
 };
+
 export const BarWeight = (props: PropTypes) => {
   const handleChange = (e: SelectChangeEvent<number>) => {
-    // props.updateBarWeight(e.target.value as number);
+    props.updateBarWeight(e.target.value as number);
   };
 
   return (
@@ -26,7 +27,7 @@ export const BarWeight = (props: PropTypes) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={45}
+          value={props.barWeight}
           label="Bar Weight"
           onChange={handleChange}
         >

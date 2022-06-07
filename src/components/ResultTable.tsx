@@ -6,16 +6,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, ButtonGroup, TableFooter } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
+import { LoadoutType } from "../App";
 
 function createData(
   plateValue: number,
   editButtons: any,
   perSide: number,
-  totalAmount: number,
+
   weightTotal: number
 ) {
-  return { plateValue, editButtons, perSide, totalAmount, weightTotal };
+  return { plateValue, editButtons, perSide, weightTotal };
 }
 
 const buttons = [<Button key="add">+</Button>, <Button key="delete">-</Button>];
@@ -26,25 +27,46 @@ const testButtons = (
   </>
 );
 
-const rows = [
-  createData(55, testButtons, 6.0, 24, 4.0),
-  createData(45, testButtons, 6.0, 24, 4.0),
-  createData(35, testButtons, 6.0, 24, 4.0),
-  createData(25, testButtons, 6.0, 24, 4.0),
-  createData(15, testButtons, 6.0, 24, 4.0),
-];
+type PropTypes = {
+  loadout: LoadoutType;
+  barWeight: number;
+};
 
-const ResultTable = () => {
+const ResultTable = (props: PropTypes) => {
+  const rows = props.loadout.map((entry) => {
+    const totalAmount = 2 * entry.amountPerSide;
+    const totalWeight = totalAmount * entry.plate;
+
+    return createData(
+      entry.plate,
+      testButtons,
+      entry.amountPerSide,
+      totalWeight
+    );
+  });
+
+  const getTotalWeight = () => {
+    let total: number = 0;
+
+    props.loadout.forEach((entry) => {
+      total += entry.plate * entry.amountPerSide * 2;
+    });
+
+    return total;
+  };
+
+  let plateTotal = getTotalWeight();
+
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Plate Value</TableCell>
+            <TableCell align="center">Plate Value</TableCell>
             <TableCell align="center">Edit</TableCell>
-            <TableCell align="right">Per Side</TableCell>
-            <TableCell align="right">Total Amount</TableCell>
-            <TableCell align="right">Total Weight</TableCell>
+            <TableCell align="center">Amount Per Side</TableCell>
+
+            <TableCell align="center">Total Weight</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -53,22 +75,26 @@ const ResultTable = () => {
               key={row.plateValue}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" align="center">
                 {row.plateValue}
               </TableCell>
-              <TableCell align="right">{row.editButtons}</TableCell>
-              <TableCell align="right">{row.perSide}</TableCell>
-              <TableCell align="right">{row.totalAmount}</TableCell>
-              <TableCell align="right">{row.weightTotal}</TableCell>
+              <TableCell align="center">{row.editButtons}</TableCell>
+              <TableCell align="center">{row.perSide}</TableCell>
+              <TableCell align="center">{row.weightTotal}</TableCell>
             </TableRow>
           ))}
           <TableRow sx={{ margingTop: 1 }}>
-            <TableCell colSpan={2} rowSpan={5} />
-            <TableCell colSpan={2}>
+            <TableCell />
+            <TableCell />
+
+            <TableCell align="right">
               <strong>Total</strong>
             </TableCell>
-            <TableCell rowSpan={2} align="right">
-              <strong>250lbs</strong>
+            <TableCell align="center">
+              <strong>
+                {plateTotal} plates + {props.barWeight} bar ={" "}
+                {plateTotal + props.barWeight} lbs
+              </strong>
             </TableCell>
           </TableRow>
         </TableBody>

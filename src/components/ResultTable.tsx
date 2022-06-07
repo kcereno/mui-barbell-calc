@@ -63,7 +63,7 @@ const ResultTable = (props: PropTypes) => {
         <TableHead>
           <TableRow>
             <TableCell align="center">Plate Value</TableCell>
-            <TableCell align="center">Edit</TableCell>
+            {/* <TableCell align="center">Edit</TableCell> */}
             <TableCell align="center">Amount Per Side</TableCell>
 
             <TableCell align="center">Total Weight</TableCell>
@@ -78,19 +78,19 @@ const ResultTable = (props: PropTypes) => {
               <TableCell component="th" scope="row" align="center">
                 {row.plateValue}
               </TableCell>
-              <TableCell align="center">{row.editButtons}</TableCell>
+              {/* <TableCell align="center">{row.editButtons}</TableCell> */}
               <TableCell align="center">{row.perSide}</TableCell>
               <TableCell align="center">{row.weightTotal}</TableCell>
             </TableRow>
           ))}
           <TableRow sx={{ margingTop: 1 }}>
             <TableCell />
-            <TableCell />
+            {/* <TableCell /> */}
 
             <TableCell align="right">
               <strong>Total</strong>
             </TableCell>
-            <TableCell align="center">
+            <TableCell align="right">
               <strong>
                 {plateTotal} plates + {props.barWeight} bar ={" "}
                 {plateTotal + props.barWeight} lbs

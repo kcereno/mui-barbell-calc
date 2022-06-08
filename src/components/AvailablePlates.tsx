@@ -36,6 +36,20 @@ type PropTypes = {
 const AvailablePlates = (props: PropTypes) => {
   const theme = useTheme();
 
+  interface plateColorIndexSignature {
+    [key: number]: string;
+  }
+  const plateColors: plateColorIndexSignature = {
+    55: "maroon",
+    45: "blue",
+    35: "yellow",
+    25: "green",
+    15: "grey",
+    10: "grey",
+    5: "grey",
+    2.5: "grey",
+  };
+
   const handleChange = (
     event: SelectChangeEvent<typeof props.availablePlates>
   ) => {
@@ -74,9 +88,19 @@ const AvailablePlates = (props: PropTypes) => {
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                 {selected
                   .sort((a, b) => a - b)
-                  .map((value) => (
-                    <Chip key={value} label={value} />
-                  ))}
+                  .map((value) => {
+                    const plateColor = plateColors[value];
+                    return (
+                      <Chip
+                        key={value}
+                        label={value}
+                        style={{
+                          backgroundColor: plateColor,
+                          color: value === 35 ? "black" : "white",
+                        }}
+                      />
+                    );
+                  })}
               </Box>
             )}
             MenuProps={MenuProps}

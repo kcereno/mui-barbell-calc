@@ -22,14 +22,22 @@ function App() {
   const [availablePlates, setAvailablePlates] = useState([
     2.5, 5, 10, 15, 25, 35, 45, 55,
   ]);
+  const [formsAreValid, setFormsAreValid] = useState(false);
+  const [isFirstSubmit, setIsFirstSubmit] = useState(true);
 
   const INITIAL_LOADOUT_VALUE = [] as LoadoutType;
   const [loadout, setLoadout] = useState<LoadoutType>(INITIAL_LOADOUT_VALUE);
 
   const handleSubmit = () => {
-    console.log("SUBMIT");
-    const loadout = calculateLoadout(barWeight, targetWeight, availablePlates);
-    setLoadout(loadout);
+    setIsFirstSubmit(false);
+    if (formsAreValid) {
+      const loadout = calculateLoadout(
+        barWeight,
+        targetWeight,
+        availablePlates
+      );
+      setLoadout(loadout);
+    }
   };
   const handleReset = () => {
     setTargetWeight(0);
@@ -48,6 +56,7 @@ function App() {
           <TargetWeight
             barWeight={barWeight}
             updateTargetWeight={setTargetWeight}
+            validateForm={setFormsAreValid}
           />
         </Grid>
         <Grid item xs={12}>
@@ -58,6 +67,18 @@ function App() {
         </Grid>
         <Grid item xs={12}>
           <Buttons submit={handleSubmit} reset={handleReset} />
+          {!formsAreValid && !isFirstSubmit && (
+            <p
+              style={{
+                color: "red",
+                textAlign: "center",
+                fontSize: "0.8em",
+                font: "Roboto",
+              }}
+            >
+              Please ensure all fields are filled correctly when submitting
+            </p>
+          )}
         </Grid>
         <Grid item xs={12}>
           {loadout.length === 0 ? null : (

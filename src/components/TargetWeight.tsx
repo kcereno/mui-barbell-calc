@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 type PropTypes = {
   barWeight: number;
   updateTargetWeight: React.Dispatch<React.SetStateAction<number>>;
+  validateForm: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const TargetWeight = (props: PropTypes) => {
@@ -19,8 +20,10 @@ const TargetWeight = (props: PropTypes) => {
 
     if (+input < props.barWeight) {
       setInputIsValid(false);
+      props.validateForm(false);
     } else {
       setInputIsValid(true);
+      props.validateForm(true);
     }
     props.updateTargetWeight(+input);
   };

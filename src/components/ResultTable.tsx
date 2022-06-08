@@ -62,13 +62,19 @@ const ResultTable = (props: PropTypes) => {
       <Table size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell align="center">Plate Value</TableCell>
+            <TableCell align="center" sx={{ width: "33%" }}>
+              Plate Value
+            </TableCell>
             {/* <TableCell align="center">Edit</TableCell> */}
-            <TableCell align="center">Amount Per Side</TableCell>
-
-            <TableCell align="center">Total Weight</TableCell>
+            <TableCell align="center" sx={{ width: "33%" }}>
+              Amount Per Side
+            </TableCell>
+            <TableCell align="center" sx={{ width: "33%" }}>
+              Total Weight
+            </TableCell>
           </TableRow>
         </TableHead>
+
         <TableBody>
           {rows.map((row) => (
             <TableRow
@@ -83,18 +89,25 @@ const ResultTable = (props: PropTypes) => {
               <TableCell align="center">{row.weightTotal}</TableCell>
             </TableRow>
           ))}
-          <TableRow sx={{ margingTop: 1 }}>
-            <TableCell />
-            {/* <TableCell /> */}
 
-            <TableCell align="right">
+          <TableRow>
+            <TableCell rowSpan={2} />
+            <TableCell align="center">
+              <strong>Subtotals</strong>
+            </TableCell>
+            <TableCell align="center">
+              <strong>
+                {plateTotal}(plates) + {props.barWeight}(bar)
+              </strong>
+            </TableCell>
+          </TableRow>
+
+          <TableRow>
+            <TableCell align="center">
               <strong>Total</strong>
             </TableCell>
-            <TableCell align="right">
-              <strong>
-                {plateTotal} plates + {props.barWeight} bar ={" "}
-                {plateTotal + props.barWeight} lbs
-              </strong>
+            <TableCell align="center">
+              <strong>{props.barWeight + plateTotal} lbs</strong>
             </TableCell>
           </TableRow>
         </TableBody>

@@ -22,7 +22,7 @@ function App() {
   const [barWeight, setBarWeight] = useState<number>(45);
   const [targetWeight, setTargetWeight] = useState<string>("");
   const [availablePlates, setAvailablePlates] = useState([
-    2.5, 5, 10, 15, 25, 35, 45, 55,
+    2.5, 5, 10, 25, 35, 45, 55,
   ]);
   const [formsAreValid, setFormsAreValid] = useState(false);
   const [isFirstSubmit, setIsFirstSubmit] = useState(true);

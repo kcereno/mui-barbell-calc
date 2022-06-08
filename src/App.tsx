@@ -17,19 +17,21 @@ export type LoadoutEntryType = {
 export type LoadoutType = LoadoutEntryType[];
 
 function App() {
+  const INITIAL_LOADOUT_VALUE = [] as LoadoutType;
+
   const [barWeight, setBarWeight] = useState<number>(45);
-  const [targetWeight, setTargetWeight] = useState<number>(0);
+  const [targetWeight, setTargetWeight] = useState<string>("");
   const [availablePlates, setAvailablePlates] = useState([
     2.5, 5, 10, 15, 25, 35, 45, 55,
   ]);
   const [formsAreValid, setFormsAreValid] = useState(false);
   const [isFirstSubmit, setIsFirstSubmit] = useState(true);
 
-  const INITIAL_LOADOUT_VALUE = [] as LoadoutType;
   const [loadout, setLoadout] = useState<LoadoutType>(INITIAL_LOADOUT_VALUE);
 
   const handleSubmit = () => {
     setIsFirstSubmit(false);
+
     if (formsAreValid) {
       const loadout = calculateLoadout(
         barWeight,
@@ -40,9 +42,11 @@ function App() {
     }
   };
   const handleReset = () => {
-    setTargetWeight(0);
+    setTargetWeight("");
     setAvailablePlates([2.5, 5, 10, 15, 25, 35, 45, 55]);
     setLoadout([]);
+    setIsFirstSubmit(true);
+    setFormsAreValid(false);
   };
 
   return (
@@ -55,6 +59,7 @@ function App() {
         <Grid item xs={12} sm={6}>
           <TargetWeight
             barWeight={barWeight}
+            targetWeight={targetWeight}
             updateTargetWeight={setTargetWeight}
             validateForm={setFormsAreValid}
           />

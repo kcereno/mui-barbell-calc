@@ -4,8 +4,9 @@ import TextField from "@mui/material/TextField";
 
 type PropTypes = {
   barWeight: number;
-  updateTargetWeight: React.Dispatch<React.SetStateAction<number>>;
+  updateTargetWeight: React.Dispatch<React.SetStateAction<string>>;
   validateForm: React.Dispatch<React.SetStateAction<boolean>>;
+  targetWeight: string;
 };
 
 const TargetWeight = (props: PropTypes) => {
@@ -25,7 +26,7 @@ const TargetWeight = (props: PropTypes) => {
       setInputIsValid(true);
       props.validateForm(true);
     }
-    props.updateTargetWeight(+input);
+    props.updateTargetWeight(input);
   };
 
   return (
@@ -43,6 +44,7 @@ const TargetWeight = (props: PropTypes) => {
         variant="outlined"
         type="number"
         onChange={handleChange}
+        value={props.targetWeight}
       />
     </Box>
   );

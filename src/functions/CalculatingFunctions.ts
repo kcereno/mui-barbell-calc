@@ -2,10 +2,12 @@ import { LoadoutType, LoadoutEntryType } from "../App";
 
 export const calculateLoadout = (
   barWeight: number,
-  targetWeight: number,
+  targetWeight: string,
   availablePlates: number[]
 ): LoadoutType => {
-  let calcWeight = (targetWeight - barWeight) / 2;
+  console.log("triggered");
+
+  let calcWeight = (+targetWeight - barWeight) / 2;
   const sortedPlates = availablePlates.sort((a, b) => b - a);
   let resultArr: LoadoutType = [];
 

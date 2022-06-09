@@ -6,10 +6,10 @@ type PropTypes = {
   reset: () => void;
 };
 
-const Buttons = (props: PropTypes) => {
+const Buttons = ({ submit, reset }: PropTypes) => {
   return (
     <Box sx={{ margin: 1, display: "flex", justifyContent: "center" }}>
-      <Button variant="contained" size="large" onClick={props.submit}>
+      <Button variant="contained" size="large" onClick={submit}>
         Calculate
       </Button>
       <Button
@@ -17,7 +17,7 @@ const Buttons = (props: PropTypes) => {
         variant="contained"
         size="large"
         color="error"
-        onClick={props.reset}
+        onClick={reset}
       >
         Reset
       </Button>

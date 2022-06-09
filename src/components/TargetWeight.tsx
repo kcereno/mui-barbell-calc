@@ -35,7 +35,15 @@ const TargetWeight = ({
   };
 
   return (
-    <Box sx={{ marginTop: { sm: 2 }, marginRight: 1, marginLeft: { xs: 1 } }}>
+    <Box
+      sx={{
+        marginTop: { sm: 2 },
+        marginRight: 1,
+        marginLeft: { xs: 1 },
+        marginBottom: { xs: 3.5, sm: 3 },
+        maxHeight: "50px",
+      }}
+    >
       <TextField
         error={isTouched && !inputIsValid}
         helperText={

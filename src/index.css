@@ -3,7 +3,10 @@ body {
   font-family: 'roboto';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: grey;
+  background-color: #808080;
+  background-color: #808080;
+background-image: url("https://www.transparenttextures.com/patterns/diagmonds.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 code {

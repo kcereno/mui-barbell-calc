@@ -9,9 +9,9 @@ type PropTypes = {
   updateBarWeight: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const BarWeight = (props: PropTypes) => {
+export const BarWeight = ({ barWeight, updateBarWeight }: PropTypes) => {
   const handleChange = (e: SelectChangeEvent<number>) => {
-    props.updateBarWeight(e.target.value as number);
+    updateBarWeight(e.target.value as number);
   };
 
   return (
@@ -27,7 +27,7 @@ export const BarWeight = (props: PropTypes) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={props.barWeight}
+          value={barWeight}
           label="Bar Weight"
           onChange={handleChange}
         >

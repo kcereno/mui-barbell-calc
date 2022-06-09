@@ -33,7 +33,7 @@ type PropTypes = {
   updatePlates: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
-const AvailablePlates = (props: PropTypes) => {
+const AvailablePlates = ({ availablePlates, updatePlates }: PropTypes) => {
   const theme = useTheme();
 
   interface plateColorIndexSignature {
@@ -50,13 +50,11 @@ const AvailablePlates = (props: PropTypes) => {
     2.5: "grey",
   };
 
-  const handleChange = (
-    event: SelectChangeEvent<typeof props.availablePlates>
-  ) => {
+  const handleChange = (event: SelectChangeEvent<typeof availablePlates>) => {
     const {
       target: { value },
     } = event;
-    props.updatePlates(value as number[]);
+    updatePlates(value as number[]);
   };
 
   const plates = [2.5, 5, 10, 15, 25, 35, 45, 55];
@@ -76,7 +74,7 @@ const AvailablePlates = (props: PropTypes) => {
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"
             multiple
-            value={props.availablePlates}
+            value={availablePlates}
             onChange={handleChange}
             input={
               <OutlinedInput
@@ -109,7 +107,7 @@ const AvailablePlates = (props: PropTypes) => {
               <MenuItem
                 key={plateValue}
                 value={plateValue}
-                style={getStyles(plateValue, props.availablePlates, theme)}
+                style={getStyles(plateValue, availablePlates, theme)}
               >
                 {plateValue}
               </MenuItem>

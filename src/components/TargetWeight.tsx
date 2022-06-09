@@ -9,7 +9,12 @@ type PropTypes = {
   targetWeight: string;
 };
 
-const TargetWeight = (props: PropTypes) => {
+const TargetWeight = ({
+  barWeight,
+  updateTargetWeight,
+  validateForm,
+  targetWeight,
+}: PropTypes) => {
   const [inputIsValid, setInputIsValid] = useState(false);
   const [isTouched, setisTouched] = useState(false);
 
@@ -19,14 +24,14 @@ const TargetWeight = (props: PropTypes) => {
     setisTouched(true);
     const input = e.target.value;
 
-    if (+input < props.barWeight) {
+    if (+input < barWeight) {
       setInputIsValid(false);
-      props.validateForm(false);
+      validateForm(false);
     } else {
       setInputIsValid(true);
-      props.validateForm(true);
+      validateForm(true);
     }
-    props.updateTargetWeight(input);
+    updateTargetWeight(input);
   };
 
   return (
@@ -44,7 +49,7 @@ const TargetWeight = (props: PropTypes) => {
         variant="outlined"
         type="number"
         onChange={handleChange}
-        value={props.targetWeight}
+        value={targetWeight}
       />
     </Box>
   );

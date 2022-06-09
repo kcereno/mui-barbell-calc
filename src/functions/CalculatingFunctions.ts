@@ -5,7 +5,6 @@ export const calculateLoadout = (
   targetWeight: string,
   availablePlates: number[]
 ): LoadoutType => {
-  console.log("triggered");
 
   let calcWeight = (+targetWeight - barWeight) / 2;
   const sortedPlates = availablePlates.sort((a, b) => b - a);
